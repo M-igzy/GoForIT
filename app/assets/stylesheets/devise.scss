@@ -1,0 +1,83 @@
+// Place all the styles related to the journals controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.login-form {
+    a {
+        color: #fff;
+    }
+}
+
+.error-message-login {
+    color: red;
+    font-weight: 550;
+}
+
+.bx-x {
+    color: red;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.alert-success {
+    background: #303447;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    text-align: center;
+    padding: 1rem 1rem;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.login-category,
+.signup-category {
+    gap: 15%;
+}
+
+.actions {
+    input[type="submit"] {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: rgb(22, 213, 92);
+        font-size: 1.5rem;
+        font-weight: 550;
+        cursor: pointer;
+    }
+}
+
+.to-sign-up-btn {
+    color: rgb(203, 126, 233) !important;
+    font-weight: 550;
+}
+
+@media screen and (max-width: 768px) {
+    .login-category {
+        width: 100%;
+        transform: translateX(1rem) !important;
+        margin-top: -8rem;
+    }
+
+    .signup-category {
+        transform: translateX(1rem) !important;
+        margin-top: -10rem;
+    }
+
+    .is-medium.input,
+    .is-medium.textarea {
+        font-size: 1.15rem;
+        height: 2rem;
+    }
+
+    .to-email-btn {
+        font-size: 1rem !important;
+    }
+}
+
+// @media screen and (max-height: 800px) {
+//     .new-category-svg {
+//         width: 250px !important;
+//     }
+// }

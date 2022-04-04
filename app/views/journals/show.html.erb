@@ -1,0 +1,228 @@
+<%= javascript_pack_tag 'alert' %>
+<%= render 'nav' %>
+
+<section id="dashboard-top-card">
+
+<div class="container tiles">
+
+    <div
+        id="task_box"
+        class="box journal-box info-box has-text-white box-bg mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-space-between"
+    >
+        <div class="is-size-4">
+            <svg id="taskLogo" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
+                <path d="m13.061 4.939-2.122 2.122L15.879 12l-4.94 4.939 2.122 2.122L20.121 12z" stroke="white" stroke-width="1"></path>
+                <path d="M6.061 19.061 13.121 12l-7.06-7.061-2.122 2.122L8.879 12l-4.94 4.939z" stroke="white" stroke-width="1"></path>
+            </svg>
+            <%= @journal.name %>
+        </div>
+
+        <div class="task-progress-container is-flex">
+            <div class="mr-3 progress-container">
+                <%= @journal.percent_complete %>% Task Completed
+                <progress 
+                    class="progress is-normal is-success"
+                    value="<%= @journal.percent_complete %>" max="100">
+                </progress>
+            </div>
+            <div class="add-task">
+                <%# Link ng New Task Path %>
+                <%= link_to new_journal_task_path(@journal) do%>
+                    <i class="fas fa-plus mr-3" aria-hidden="true"></i>Task
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <% if @journal.tasks.count == 0 %>
+        <div class="empty-task-container container is-flex is-justify-content-center is-align-items-center">
+            <%= image_tag("empty-animate.svg", :alt => 'empty tasks image', class: "new-category-svg") %>
+            <div class="no-tasks-button is-flex is-justify-content-center has-text-centered">
+                <p>No Tasks Yet</p>
+                <%# Link ng New Task Path %>
+                <%= link_to new_journal_task_path(@journal) do%>
+                    <i class="fas fa-plus mr-3" aria-hidden="true"></i>Add Task Now
+                <% end %>
+            </div>
+        </div>
+    <% else %>
+
+    <div class="container tiles">
+        <div
+            id="completed-top-card"
+            class="box box2 info-box due-box box-bg mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-center"
+        >
+        <div class="is-size-3 has-text-centered">
+        <svg id="taskLogo" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
+            <path d="M20.5 5A1.5 1.5 0 0 0 19 6.5V11h-1V4.5a1.5 1.5 0 0 0-3 0V11h-1V3.5a1.5 1.5 0 0 0-3 0V11h-1V5.5a1.5 1.5 0 0 0-3 0v10.81l-2.22-3.6a1.5 1.5 0 0 0-2.56 1.58l3.31 5.34A5 5 0 0 0 9.78 22H17a5 5 0 0 0 5-5V6.5A1.5 1.5 0 0 0 20.5 5z" stroke="red" stroke-width="1"></path>
+        </svg>
+            Due Tasks Today!
+        </div>
+    </div>
+
+    <div class="tile tile-container is-ancestor">
+    <% @journal.tasks.each do |task| %>
+
+
+    <% if task.completed? == false and task.deadline.today? %>
+      
+    <div class="tile tile-item is-parent is-shady tile-color">
+      <article class="tile is-child box card-bg"  id="task_box">
+      <%= raw task_label(task)[:html] %>
+      
+      <br>
+      <div class="tile-contents">
+        <strong><%= task.name %></strong>  
+        <br/>
+        <span class="tasks-time">
+            <i class='bx bxs-time' ></i>         
+            <%= date_parse(task.deadline) %>
+         </span>
+        <br/>
+        <i class='bx bxs-chevron-right' ></i>
+        <span class='tasks-desc'>
+            <%= truncate(strip_tags(task.description.to_s), length: 100) %>
+        </span>
+      </div>
+        <div class="tile-actions tasks-icons is-flex is-justify-content-flex-end">
+        
+            <%= link_to journal_task_path(@journal, task), class:"button  has-text-primary action-tile-button mr-2" do%>
+                <i class='bx bx-expand-alt' ></i>
+            <% end %>
+            <%= link_to edit_journal_task_path(@journal, task), class:"button  has-text-warning action-tile-button mr-2" do%>
+                <i class='bx bxs-edit-alt'></i>
+            <% end %>
+            <%= link_to journal_task_path(@journal, task), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class:"button has-text-danger" do %>
+                <i class='bx bxs-trash' ></i>
+            <% end %>
+        </div>
+        
+      </article>
+    </div>
+    <% end %>
+    <% end %>
+    </div>
+  </div>
+
+    <div class="container tiles">
+        <div
+            id="completed-top-card"
+            class="box box2 your-tasks info-box box-bg mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-center"
+        >
+        <div class="is-size-3 has-text-centered">
+        <svg id="taskLogo" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
+            <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8l8-8V5a2 2 0 0 0-2-2zm-7 16v-7h7l-7 7z" stroke="white" stroke-width="1"></path>
+        </svg>
+            Your Tasks
+        </div>
+    </div>
+
+    <div class="tile tile-container is-ancestor">
+    <% @journal.tasks.each do |task| %>
+
+
+    <% if task.completed? == false and !task.deadline.today? %>
+      
+    <div class="tile tile-item is-parent is-shady tile-color">
+      <article class="tile is-child box card-bg"  id="task_box">
+      <%= raw task_label(task)[:html] %>
+      
+      <br>
+      <div class="tile-contents">
+        <strong><%= task.name %></strong>  
+        <br/>
+        <span class="tasks-time">
+            <i class='bx bxs-time' ></i>         
+            <%= date_parse(task.deadline) %>
+         </span>
+        <br/>
+        <i class='bx bxs-chevron-right' ></i>
+        <span class='tasks-desc'>
+            <%= truncate(strip_tags(task.description.to_s), length: 100) %>
+        </span>
+      </div>
+        <div class="tile-actions tasks-icons is-flex is-justify-content-flex-end">
+        
+            <%= link_to journal_task_path(@journal, task), class:"button  has-text-primary action-tile-button mr-2" do%>
+                <i class='bx bx-expand-alt' ></i>
+            <% end %>
+            <%= link_to edit_journal_task_path(@journal, task), class:"button  has-text-warning action-tile-button mr-2" do%>
+                <i class='bx bxs-edit-alt'></i>
+            <% end %>
+            <%= link_to journal_task_path(@journal, task), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class:"button has-text-danger" do %>
+                <i class='bx bxs-trash' ></i>
+            <% end %>
+        </div>
+        
+      </article>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+  </div>
+  </section>
+
+  <% unless @journal.percent_complete == 0 %>
+    
+  <section id="dashboard-top-card">
+  <div class="container tiles">
+  <div
+    id="task_box2"
+    class="box info-box completed has-text-white box-bg2 mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-center"
+  >
+    <div class="is-size-4">
+
+       <svg id="taskLogo" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
+            <path d="m2.394 13.742 4.743 3.62 7.616-8.704-1.506-1.316-6.384 7.296-3.257-2.486zm19.359-5.084-1.506-1.316-6.369 7.279-.753-.602-1.25 1.562 2.247 1.798z" stroke="white" stroke-width="1"></path>
+        </svg>
+        Completed Tasks
+      
+    </div>
+    </div>
+
+  <div class="tile tile-container is-ancestor">
+  <% @journal.tasks.each do |task| %>
+    <% unless task.completed? == false %>
+      
+    <div class="tile tile-item is-parent is-shady tile-color">
+      <article class="tile is-child box card-bg"  id="task_box">
+      <%= raw task_label(task)[:html] %>
+      
+      <br>
+      <div class="tile-contents">
+        <strong><%= task.name %></strong>  
+        <br/>
+        <span class="tasks-time">
+            <i class='bx bxs-time' ></i>         
+            <%= date_parse(task.deadline) %>
+         </span>
+        <br/>
+        <i class='bx bxs-chevron-right' ></i>
+        <span class='tasks-desc'>
+            <%= truncate(strip_tags(task.description.to_s), length: 100) %>
+        </span>
+      </div>
+        <div class="tile-actions tasks-icons is-flex is-justify-content-flex-end">
+        
+            <%= link_to journal_task_path(@journal, task), class:"button  has-text-primary action-tile-button mr-2" do%>
+                <i class='bx bx-expand-alt' ></i>
+            <% end %>
+            <%= link_to edit_journal_task_path(@journal, task), class:"button  has-text-warning action-tile-button mr-2" do%>
+                <i class='bx bxs-edit-alt'></i>
+            <% end %>
+            <%= link_to journal_task_path(@journal, task), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class:"button has-text-danger" do %>
+                <i class='bx bxs-trash' ></i>
+            <% end %>
+        </div>
+        
+      </article>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+
+</section>
+<% end %>
+
+<% end %>

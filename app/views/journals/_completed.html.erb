@@ -1,0 +1,48 @@
+            <%#<div class="columns is-desktop is-multiline tasks-col"> %>
+            <div class="tile tile-container is-ancestor">
+            <%# if there is or are tasks available %>
+                <% @journal.tasks.each do |task| %>
+                    <% if task.completed? == false and task.deadline.today? %>
+                    <%#<div class="column tasks-column"> %>
+                    <div class="tile-contents">
+                        <span class="task-status-label">
+                            <%= raw task_label(task)[:html] %>
+                        </span>
+                        <br/>
+                        <strong><%= task.name %></strong>  
+                        <br/>
+                        <span class="tasks-time">
+                            <i class='bx bxs-time' ></i>         
+                            <%= date_parse(task.deadline) %>
+                        </span>
+                        <br/>
+                        <i class='bx bxs-chevron-right' ></i>
+                        <span class='tasks-desc'>
+                            <%= truncate(strip_tags(task.description.to_s), length: 100) %>
+                        </span>
+                        <div class='tasks-icons'>
+                            <%# show task path %>
+                            <%= link_to journal_task_path(@journal, task) do%>
+                                <i class='bx bx-expand-alt' ></i>
+                            <% end %>
+
+                            <br/>
+
+                            <%# edit task path %>
+                            <%= link_to edit_journal_task_path(@journal, task) do%>
+                                <i class='bx bxs-edit-alt'></i>
+                            <% end %>
+
+                            <br/>
+
+                            <%# delete task %>
+                            <%= link_to journal_task_path(@journal, task), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                                <i class='bx bxs-trash' ></i>
+                            <% end %>
+                        </div>
+                    <% end %>
+                    </div>
+                <% end %>
+
+                <br/>
+            </div>

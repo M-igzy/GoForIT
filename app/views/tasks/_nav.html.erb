@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal App [Avion]</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+</head>
+<body>
+    <header id="header" class="journal-header">
+
+        <div class="header-logo journal-logo">
+        <%= link_to root_path do%>
+            <svg id="j-svg" width="75" height="60" viewBox="0 0 75 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M74.8904 4.25538L55.6964 75.8884C53.5596 83.8631 49.3878 89.603 43.1812 93.108C36.9994 96.5203 29.8748 97.1456 21.8073 94.984C13.6472 92.7975 7.75582 88.6349 4.13322 82.4961C0.535459 76.2646 -0.132897 68.9297 2.12815 60.4913L14.7856 63.8829C13.6112 68.6369 13.7855 72.8082 15.3087 76.3966C16.9245 80.01 20.097 82.4502 24.8262 83.7174C29.5554 84.9846 33.4518 84.5378 36.5154 82.3771C39.6039 80.1237 41.732 76.8179 42.8998 72.4596L62.0938 0.826544L74.8904 4.25538Z" fill="white" />
+            </svg>
+            <svg id="l-svg" width="74" height="70" viewBox="0 0 74 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M36.5031 87.5076L70.4419 78.4137L73.1999 88.7066L26.6036 101.192L0.626465 4.24402L13.284 0.852454L36.5031 87.5076Z" fill="white" />
+            </svg>
+        <% end %>
+        </div>
+
+        <div class="navbar">
+            <div class="navbar-items">
+                <%= link_to journals_path do%>
+                    <div>
+                        <svg class="dashboard-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                        </svg>
+                        Dashboard
+                    </div>
+                <% end %>
+                <%= link_to new_journal_path do%>
+                    <div>
+                    <svg class="newcat-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
+                    New Category
+                    </div>
+                <% end %>
+                <%= link_to destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to sign-out?' } do%>
+                    <div>
+                        <svg class="signout-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Sign Out
+                    </div>
+                <% end %>
+            </div>
+        </div>
+
+    </header>
+</body>
+</html>

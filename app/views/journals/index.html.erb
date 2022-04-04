@@ -1,0 +1,73 @@
+<%= javascript_pack_tag 'alert' %>
+
+<%= render 'navbar' %>
+
+<% if notice %>
+    <p class="alert alert-success"><%= notice %>
+        <i class='bx bx-x'></i>
+    </p>
+<% end %>
+
+<section id="index-journal" class="index-journal">
+
+  <div class="container tiles">
+    <div
+        id="dashboard-top-card-statistics"
+        class="box box2 info-box box-bg mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-center"
+    >
+    <div class="is-size-3 has-text-centered">
+        <span class="journal-user">
+            <i class='bx bxs-user-circle' ></i>
+            <%= current_user.username %>
+        </span>
+        <i class='bx bxs-book-content mr-1 logo-font is-size-4'></i>
+            Your Categories
+    </div>
+    <% @journals.each do |journal| %>
+      <div class="categories-progress-container">
+      </div>
+    <% end %>
+  </div>
+
+    <div class="columns is-desktop is-multiline journals-col">
+        <% @journals.each do |journal| %>
+            <% unless @journals.count == 0 %>
+                <div class="column journals-column">
+                    <strong><%= journal.name %></strong>
+                    <br/>
+                    <% if journal.tasks.count == 1 %>
+                        <span>
+                            <i class='bx bxs-notepad' ></i>
+                            <%= journal.tasks.count %> Task
+                        </span>
+                    <% else %>
+                        <span>
+                            <i class='bx bxs-notepad' ></i>
+                            <%= journal.tasks.count %> Tasks
+                        </span>
+                    <% end %>
+                    <br/>
+                    <span class='journal-time'>
+                        <i class='bx bxs-time-five' ></i>
+                        Started <%= time_ago_in_words(journal.created_at) %> ago
+                    </span>
+                    <br/>
+                    <div class='journal-icons'>
+                        <%= link_to journal_path(journal) do%>
+                            <i class='bx bxs-add-to-queue'></i>
+                        <% end %>
+                        <br/>
+                        <%= link_to edit_journal_path(journal) do%>
+                            <i class='bx bxs-edit'></i>
+                        <% end %>
+                        <br/>
+                        <%= link_to journal, method: :delete, data: {confirm: 'Are you sure?'} do%>
+                            <i class='bx bxs-trash'></i>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+
+</section>

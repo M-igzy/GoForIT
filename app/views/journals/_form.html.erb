@@ -1,0 +1,33 @@
+<%= form_with(model: journal) do |form| %>
+
+    <% if journal.errors.any? %>
+        <ul class="error-message">
+            <% journal.errors.each do |error| %>
+                <li> <%= error.full_message %> </li>
+            <% end %>
+        </ul>
+    <% end %>
+
+
+    <%= form.text_field :name, placeholder: '✏️ Category Title', class: 'input is-medium', autocomplete: :off %>
+
+    <br/>
+
+    <div class="category-buttons">
+
+        <%= form.button do%>
+            <%= raw '<i class="fas fa-plus mr-3"></i>' if action_name.capitalize == 'Create' %>
+            <%= raw '<i class="fas fa-plus mr-3"></i>' if action_name.capitalize == 'New' %>
+            <%= raw '<i class="fas fa-edit mr-3"></i>' if action_name.capitalize == 'Update' %>
+            <%= raw '<i class="fas fa-edit mr-3"></i>' if action_name.capitalize == 'Edit' %>
+            <%= :new if action_name.capitalize == "New" %><%= :edit if action_name.capitalize == "Edit" %> Category
+        <% end %>
+
+        <%= link_to journals_path do%>
+            Cancel
+        <% end %>
+
+    </div>
+
+
+<% end %>

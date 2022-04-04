@@ -1,0 +1,53 @@
+<%= javascript_pack_tag 'alert' %>
+
+<%= render 'nav' %>
+
+<section id="task-show" class="task-show">
+
+    <div class="container is-flex show-task">
+
+        <div class="show-task-svg">
+
+            <%= image_tag :'work-in-progress-animate.svg' %>
+
+            <div class="show-task-mini-details">
+                <% label = task_label(@task) %>
+                    <strong><%= @task.name %></strong>
+                    <br/>
+                    <i class='bx bxs-time' ></i>
+                    <span>Deadline: <%= date_parse(@task.deadline) %></span>
+                    <br/>
+                    Status: <span class="has-text-<%= label[:status] %>">
+                        <%= label[:message] %>
+                    </span>
+
+                    <br/><br/>
+
+                    <div class="show-tasks-icons is-flex">
+                        <%= link_to journal_path(@journal) do%>
+                            <i class='bx bx-arrow-back is-size-5' ></i>
+                        <% end %>
+
+                        <%= link_to edit_journal_task_path(@journal) do%>
+                            <i class='bx bxs-cog is-size-5' ></i>
+                        <% end %>
+                        <%= link_to journal_task_path(@journal), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                            <i class='bx bxs-trash is-size-5' ></i>
+                        <% end %>
+                    </div>
+            </div>
+
+        </div>
+
+        <div class="container show-task-details">
+            <svg id="taskLogo" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
+                <path d="m13.061 4.939-2.122 2.122L15.879 12l-4.94 4.939 2.122 2.122L20.121 12z" stroke="white" stroke-width="1"></path>
+                <path d="M6.061 19.061 13.121 12l-7.06-7.061-2.122 2.122L8.879 12l-4.94 4.939z" stroke="white" stroke-width="1"></path>
+            </svg>
+            <strong>Task Description:</strong>
+            &nbsp;<%= @task.description %>
+        </div>
+
+    </div>
+
+</section>

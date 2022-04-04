@@ -1,0 +1,118 @@
+// Place all the styles related to the tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.journal-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.journal-logo {
+    cursor: pointer;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.j-animate,
+.l-animate {
+    animation: fill 0.5s ease forwards 1.5s;
+}
+
+.j-animate path {
+    stroke-dasharray: 313;
+    stroke-dashoffset: 313;
+    animation: line-animation 2s ease forwards;
+}
+
+.l-animate path {
+    stroke-dasharray: 313;
+    stroke-dashoffset: 313;
+    animation: line-animation 2s ease forwards;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 5%;
+    background: transparent;
+
+    .navbar-items {
+        display: flex;
+        grid-gap: 5rem;
+        position: relative;
+
+        .dashboard-btn,
+        .newcat-btn,
+        .signout-btn {
+            position: absolute;
+            width: 6%;
+            margin-left: -2rem;
+            margin-top: 0rem;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 1.25rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 700px) {
+    header .header-logo {
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .journal-header {
+        display: flex;
+        flex-direction: column;
+        height: 12.5vh;
+    }
+
+    .journal-logo {
+        margin-top: -0.5rem !important;
+    }
+
+    .j-animate,
+    .l-animate,
+    #j-svg,
+    #l-svg {
+        margin-top: 1.25rem !important;
+    }
+
+    .j-animate,
+    #j-svg {
+        height: 35px !important;
+    }
+
+    .l-animate,
+    #l-svg {
+        height: 40px !important;
+    }
+
+    .dashboard-btn,
+    .newcat-btn,
+    .signout-btn {
+        display: none;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar-items {
+        white-space: nowrap;
+        grid-gap: 1.25rem !important;
+        transform: translateY(-0.5rem);
+
+        a {
+            font-size: 1rem !important;
+        }
+    }
+}
