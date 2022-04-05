@@ -1,41 +1,58 @@
 <%= javascript_pack_tag 'alert' %>
 
-<section class="home" id="home">
+<%# Ito yung main design %>
 
-<%# Ito yung Header %>
+    <header class="header-home sticky top-0 z-10 flex justify-center items-center gap-10 py-8 custom:flex-col">
 
-    <header id="header">
-
-        <div class="header-logo">
-            GoForIt
-        </div>
+        <span class="header-span text-4xl font-extrabold text-gray-900">GoForIt</span>
+        
+        <nav>
+            <ul class="nav_links flex gap-5 text-xl custom:text-xl gap-4">
+                <li class="font-semibold hover:text-gray-900"><a href="/">Home</a></li>
+                <li class="font-semibold hover:text-gray-900"><%= link_to "Organize Now", journals_path %></li>
+            </ul>
+        </nav>
 
     </header>
 
-<%# Ito yung main design %>
+    <br/><br/>
 
-    <main id="main">
+    <section class="home__main flex max-w-5xl custom:flex-col-reverse">
 
-        <% if notice %>
-            <p class="alert alert-success"><%= notice %>
-                <i class='bx bx-x'></i>
-            </p>
-        <% end %>
+        <main class="home__main flex flex-col mt-16 custom:text-center">
+            <span class="font-semibold text-4xl custom:text-2xl">We’re more than documents or a table.<br/> Customize your plans.</span>
 
-        <% if user_signed_in? %>
-            <p>
-            <%= link_to journals_path, class: 'btn-start' do%>
-                Sign Up 
-            <% end %>
-            </p>
-        <% else %>
-            <p>
-            <%= link_to  new_user_registration_path, class: 'btn-start' do%>
-                Sign Up 
-            <% end %>
-            </p>
-        <% end %>
+            <br/><br/>
 
-    </main>
+            <div class="">
+                <% if user_signed_in? %>
+                    <p>
+                    <%= link_to journals_path, class: 'bg-violet-800 rounded text-white font-semibold p-4 duration-75 hover:bg-violet-900' do%>
+                        Get Started
+                    <% end %>
+                    </p>
+                <% else %>
+                    <p>
+                    <%= link_to  new_user_registration_path, class: 'bg-violet-800 rounded text-white font-semibold p-4 duration-75 hover:bg-violet-900' do%>
+                        Get Started
+                    <% end %>
+                    </p>
+                <% end %>
+            </div>
+        </main>
 
-</section>
+        <%# Image %>
+
+        <main class="-mt-16 custom:-mt-32">
+            <%= image_tag("homeSVG.svg", :alt => 'add category image', class: "home__svg") %>
+        </main>
+
+    </section>
+
+    <br/><br/>
+
+    <footer class="mt-16 text-center">
+        <span class="text-gray-900 text-xl font-semibold">by: CS155L_BM2</span>
+    </footer>
+
+    <br/><br/>

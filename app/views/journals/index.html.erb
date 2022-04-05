@@ -2,71 +2,65 @@
 
 <%= render 'navbar' %>
 
-<% if notice %>
-    <p class="alert alert-success"><%= notice %>
-        <i class='bx bx-x'></i>
-    </p>
-<% end %>
-
 <section id="index-journal" class="index-journal">
 
-  <div class="container tiles">
-    <div
-        id="dashboard-top-card-statistics"
-        class="box box2 info-box box-bg mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-center"
-    >
-    <div class="is-size-3 has-text-centered">
-        <span class="journal-user">
-            <i class='bx bxs-user-circle' ></i>
-            <%= current_user.username %>
-        </span>
-        <i class='bx bxs-book-content mr-1 logo-font is-size-4'></i>
-            Your Categories
-    </div>
-    <% @journals.each do |journal| %>
-      <div class="categories-progress-container">
-      </div>
-    <% end %>
-  </div>
+    <%# Show User Profile %>
 
-    <div class="columns is-desktop is-multiline journals-col">
+        <div class="flex justify-center items-center gap-8 font-semibold text-2xl">
+            <div>
+                <i class='bx bxs-user-circle text-violet-900 mt-1' ></i>
+                <%= current_user.username %>
+            </div>
+
+            <div>
+                <i class='bx bxs-book-content text-violet-900 mt-1'></i>
+                Your Categories
+            </div>
+        </div>
+
+    <%# End %>
+
+    <div class="journal-index grid grid-cols-4 gap-8 max-w-7xl mt-16 custom:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
         <% @journals.each do |journal| %>
-            <% unless @journals.count == 0 %>
-                <div class="column journals-column">
-                    <strong><%= journal.name %></strong>
-                    <br/>
-                    <% if journal.tasks.count == 1 %>
-                        <span>
-                            <i class='bx bxs-notepad' ></i>
-                            <%= journal.tasks.count %> Task
-                        </span>
-                    <% else %>
-                        <span>
-                            <i class='bx bxs-notepad' ></i>
-                            <%= journal.tasks.count %> Tasks
-                        </span>
-                    <% end %>
-                    <br/>
-                    <span class='journal-time'>
-                        <i class='bx bxs-time-five' ></i>
-                        Started <%= time_ago_in_words(journal.created_at) %> ago
-                    </span>
-                    <br/>
-                    <div class='journal-icons'>
-                        <%= link_to journal_path(journal) do%>
-                            <i class='bx bxs-add-to-queue'></i>
+            <div class="journal__index bg-gray-50 border-2 border-gray-500 rounded-sm w-full p-8 custom:w-3/4 md:w-3/4 lg:w-3/4 xl:w-full 2xl:w-full">
+                <% unless @journals.count == 0 %>
+                    <div class="column journals-column">
+                        <strong class="text-3xl whitespace-nowrap"><%= journal.name %></strong>
+                        <br/>
+                        <% if journal.tasks.count == 1 %>
+                            <span>
+                                <i class='bx bxs-notepad' ></i>
+                                <%= journal.tasks.count %> Task
+                            </span>
+                        <% else %>
+                            <span>
+                                <i class='bx bxs-notepad' ></i>
+                                <%= journal.tasks.count %> Tasks
+                            </span>
                         <% end %>
                         <br/>
-                        <%= link_to edit_journal_path(journal) do%>
-                            <i class='bx bxs-edit'></i>
-                        <% end %>
+                        <span class='journal-time'>
+                            <i class='bx bxs-time-five' ></i>
+                            Started <%= time_ago_in_words(journal.created_at) %> ago
+                        </span>
                         <br/>
-                        <%= link_to journal, method: :delete, data: {confirm: 'Are you sure?'} do%>
-                            <i class='bx bxs-trash'></i>
-                        <% end %>
-                    </div>
-                </div>
-            <% end %>
+
+                        <div class='journal-icons flex gap-2 mt-2'>
+                            <%= link_to journal_path(journal) do%>
+                                <i class='bx bxs-add-to-queue font-semibold text-violet-800 text-3xl hover:text-violet-600'></i>
+                            <% end %>
+                            <br/>
+                            <%= link_to edit_journal_path(journal) do%>
+                                <i class='bx bxs-edit font-semibold text-yellow-800 text-3xl hover:text-yellow-600'></i>
+                            <% end %>
+                            <br/>
+                            <%= link_to journal, method: :delete, data: {confirm: 'Are you sure?'} do%>
+                                <i class='bx bxs-trash font-semibold text-red-800 text-3xl hover:text-red-600'></i>
+                            <% end %>
+                        </div>
+                <% end %>
+            </div>
+            </div>
         <% end %>
     </div>
 

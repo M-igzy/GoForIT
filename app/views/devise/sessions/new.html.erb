@@ -1,42 +1,38 @@
 <%= javascript_pack_tag 'alert' %>
 
-<%= render 'nav' %>
-
-<section id="new-journal" class="new-journal login">
-
-  <div class="container"> 
-
-
-    <div class="log-in-form">
-
-
-
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name), id: 'form', class: 'form') do |f| %>
-        <p class="error-message-login"><%= alert %></p>
-        <div class="field">
-          <%= f.email_field :email, id: 'email', placeholder: '👤 Email', autofocus: true, class: 'input is-medium login-input', autocomplete: "email" %>
-        </div>
-
-        <div class="field">
-          <%= f.password_field :password, id: 'password', placeholder: '🔒 Password', class: 'input is-medium login-input', autocomplete: "current-password" %>
-        </div>
-
-        <% if devise_mapping.rememberable? %>
-          <div class="field">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
+    <div class="mt-16 custom:mt-4 relative">
+      
+        <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div class="max-w-md w-full space-y-8">
+            <div>
+              <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
+              <h2 class="mt-6 text-center text-4xl font-extrabold text-gray-900">Go For It</h2>
+              <p class="mt-2 text-center text-sm text-gray-600">
+                <p class="font-medium text-indigo-600 text-center hover:text-indigo-500"> by: CS155L_BM2 </p>
+              </p>
+            </div>
+            <p class="error-message-login text-red-800 font-semibold"><%= alert %></p>
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <input type="hidden" name="remember" value="true">
+              <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                  <label for="email-address" class="sr-only">Email address</label>
+                  <%= f.email_field :email, id: 'email', placeholder: '👤 Email', autofocus: true, class: 'appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm', autocomplete: "Email address" %>
+                </div>
+                <br/>
+                <div>
+                  <label for="password" class="sr-only">Password</label>
+                  <%= f.password_field :password, id: 'password', placeholder: '🔒 Password', class: 'appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm', autocomplete: "Password" %>
+                </div>
+              </div>
+              <br/><br/>
+              <div>
+                <%= f.submit "Sign in Now", id: 'login', class: 'cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+                <br/><br/>
+                <%= render "devise/shared/links" %>
+              </div>
+            <% end %>
           </div>
-        <% end %>
-
-        <div class="actions">
-          <%= f.submit "Log in", id: 'login' %>
         </div>
-      <% end %>
-
-      <%= render "devise/shared/links" %>
-
+        
     </div>
-
-  </div> 
-
-</section>

@@ -1,19 +1,21 @@
-<%= form_with(model: journal) do |form| %>
+<%= form_with(model: journal, class: 'mt-32 custom:mt-0') do |form| %>
 
     <% if journal.errors.any? %>
-        <ul class="error-message">
+        <ul class="error-message text-red-800 font-semibold">
             <% journal.errors.each do |error| %>
                 <li> <%= error.full_message %> </li>
             <% end %>
         </ul>
     <% end %>
 
+    <label class="font-semibold text-4xl">Go for it!</label>
+    <br/><br/>
 
-    <%= form.text_field :name, placeholder: '✏️ Category Title', class: 'input is-medium', autocomplete: :off %>
+    <%= form.text_field :name, placeholder: '✏️ Category Title', class: 'appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm', autocomplete: :off %>
 
     <br/>
 
-    <div class="category-buttons">
+    <div class="category-buttons flex gap-8 font-semibold text-xl">
 
         <%= form.button do%>
             <%= raw '<i class="fas fa-plus mr-3"></i>' if action_name.capitalize == 'Create' %>
@@ -23,7 +25,7 @@
             <%= :new if action_name.capitalize == "New" %><%= :edit if action_name.capitalize == "Edit" %> Category
         <% end %>
 
-        <%= link_to journals_path do%>
+        <%= link_to journals_path, class: 'font-semibold text-red-800 text-xl' do%>
             Cancel
         <% end %>
 

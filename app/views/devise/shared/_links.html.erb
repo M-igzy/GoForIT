@@ -5,7 +5,7 @@
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <span>Don't Have an Account Yet? </span>
-  <%= link_to "Sign Up Now", new_registration_path(resource_name), class: "to-sign-up-btn" %><br />
+  <%= link_to "Sign Up Now", new_registration_path(resource_name), class: "text-violet-900 font-semibold" %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

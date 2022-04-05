@@ -1,17 +1,23 @@
 <%= javascript_pack_tag 'alert' %>
 
-<%= render 'nav' %>
+<%= render 'navbar' %>
 
-<section id="new-journal" class="new-journal">
+<section id="edit-journal" class="edit-journal mt-16">
 
-    <div class="container is-flex is-align-items-center is-justify-content-center new-category">
+    <div class="flex gap-32 justify-center custom:flex-col-reverse">
+    
+        <%= render 'form', journal: @journal %>
 
-        <div class="">
-
-            <%= render 'form', journal: @journal %>
-
+        <div>
+            <%= image_tag("editing-body-task-animate.svg", :alt => 'edit category image', class: "edit__svg") %>
         </div>
 
     </div>
 
 </section>
+
+    <footer class="mt-16 text-center">
+        <span class="text-gray-900 text-xl font-semibold">by: CS155L_BM2</span>
+    </footer>
+
+    <br/><br/>
