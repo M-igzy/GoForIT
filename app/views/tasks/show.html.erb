@@ -4,14 +4,10 @@
 
 <section id="task-show" class="task-show">
 
-    <div class="container is-flex show-task">
-
-        <div class="show-task-svg">
-
-            <%= image_tag :'work-in-progress-animate.svg' %>
-
-            <div class="show-task-mini-details">
-                <% label = task_label(@task) %>
+        <div class="flex gap-32 justify-center custom:flex-col-reverse mt-16">
+            <div>
+                <div class="mt-16 text-xl">
+                    <% label = task_label(@task) %>
                     <strong><%= @task.name %></strong>
                     <br/>
                     <i class='bx bxs-time' ></i>
@@ -25,25 +21,29 @@
 
                     <div class="show-tasks-icons is-flex">
                         <%= link_to journal_path(@journal) do%>
-                            <i class='bx bx-arrow-back is-size-5' ></i>
+                            <i class='bx bx-arrow-back is-size-5 font-semibold text-violet-800 text-3xl hover:text-violet-600' ></i>
                         <% end %>
 
                         <%= link_to edit_journal_task_path(@journal) do%>
-                            <i class='bx bxs-cog is-size-5' ></i>
+                            <i class='bx bxs-cog is-size-5 font-semibold text-yellow-800 text-3xl hover:text-yellow-600' ></i>
                         <% end %>
                         <%= link_to journal_task_path(@journal), method: :delete, data: { confirm: 'Are you sure?' } do %>
-                            <i class='bx bxs-trash is-size-5' ></i>
+                            <i class='bx bxs-trash is-size-5 font-semibold text-red-800 text-3xl hover:text-red-600' ></i>
                         <% end %>
                     </div>
+                </div>
+
+                <br/><br/>
+
+                <div class="container show-task-details text-xl">
+                    <strong>Task Description:</strong>
+                    &nbsp;<%= @task.description %>
+                </div>
             </div>
 
+            <%= image_tag("mind-map-animate.svg", :alt => 'edit category image', class: "edit__svg") %>
+
         </div>
 
-        <div class="container show-task-details">
-            <strong>Task Description:</strong>
-            &nbsp;<%= @task.description %>
-        </div>
-
-    </div>
 
 </section>

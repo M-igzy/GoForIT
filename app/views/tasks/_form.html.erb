@@ -1,22 +1,21 @@
-<%= form_with(model: [journal, task], class: 'task-form') do |form| %>
+<%= form_with(model: [journal, task], class: 'mt-16 custom:mt-0') do |form| %>
 
-  <% if task.errors.any? %>
+    <% if task.errors.any? %>
+        <ul class="error-message text-red-800 font-semibold">
+            <% task.errors.each do |error| %>
+                <li> <%= error.full_message %> </li>
+            <% end %>
+        </ul>
+    <% end %>
 
-    <ul class="error-message">
-        <% task.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-        <% end %>
-    </ul>
-
-   
-  <% end %>
-
-
-    <%= form.text_field :name, placeholder: "✏️ Task Name", class: 'input is-normal task-input', autocomplete: :off %>
-
+    <label class="font-semibold text-4xl">Customize your task</label>
     <br/><br/>
 
-    <%= form.rich_text_area :description, placeholder: "📃 Task Description", class: 'textarea is-normal task-desc-ta', autocomplete: :off, maxlength: 2500 %>
+    <%= form.text_field :name, placeholder: "✏️ Task Name", class: 'appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm', autocomplete: :off %>
+
+    <br/>
+
+    <%= form.rich_text_area :description, placeholder: "📃 Task Description", class: 'rounded', autocomplete: :off, maxlength: 2500 %>
 
     <br/>
 
@@ -26,16 +25,16 @@
     <% end %>
     <%= form.date_field :deadline %>
 
-    <br/>
+    <br/><br/>
 
     <%= form.label :completed do%>
       <span>Set Status:</span>
     <% end %>
     <%= form.select :completed, Task::COMPLETED_OPTIONS, class: "select" %>
 
-    <br/>
+    <br/><br/>
 
-    <div class="is-flex is-align-items-center task-buttons ">
+    <div class="category-buttons flex gap-8 font-semibold text-xl">
       <%= form.button class: "button start-now-two" do %> 
         <%= raw '<i class="fas fa-plus mr-3"></i>' if action_name.capitalize == 'Create' %>
         <%= raw '<i class="fas fa-plus mr-3"></i>' if action_name.capitalize == 'New' %>
@@ -44,7 +43,7 @@
         <%= :new if action_name.capitalize == "New" %><%= :edit if action_name.capitalize == "Edit" %> <%= :task %>
       <% end %>
 
-      <%= link_to journal do%>
+      <%= link_to journal, class: 'font-semibold text-red-800 text-xl' do%>
         Cancel
       <% end %>
     </div>

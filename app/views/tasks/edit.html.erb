@@ -2,16 +2,24 @@
 
 <%= render 'navbar' %>
 
-<section id="new-task" class="new-task">
+<section id="new-task" class="new-task mt-16">
 
-    <div class="container is-flex is-align-items-center is-justify-content-center new-task">
+    <div class="flex gap-32 justify-center custom:flex-col-reverse">
+
+        <%= render 'form', journal: @journal, task: @task %>
 
         <div>
-
-            <%= render 'form', journal: @journal, task: @task %>
-
+            <%= image_tag("editing-body-task-animate.svg", :alt => 'edit category image', class: "edit__svg") %>
         </div>
 
     </div>
 
 </section>
+
+    <br/><br/>
+
+    <footer class="mt-16 text-center">
+        <span class="text-gray-700 text-xl font-semibold">by: CS155L_BM2</span>
+    </footer>
+
+    <br/><br/>

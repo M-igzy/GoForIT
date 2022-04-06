@@ -6,7 +6,7 @@ module ApplicationHelper
         deadline = Time.new(task.deadline.year, task.deadline.month, task.deadline.day)
     
         (status = :success and message = :Completed) if task.completed
-        (status = :danger and message = :'Past due!') if deadline.past? && !task.completed
+        (status = :danger and message = :'Due Today!') if deadline.past? && !task.completed
         (status = :light and message = :'In-progress') if deadline.future? && !task.completed
         (status = :warning and message = :'Due Today!') if deadline.today? && !task.completed
     
