@@ -4,7 +4,6 @@
         
         <nav>
             <ul class="nav_links flex gap-5 text-xl custom:text-md gap-2">
-                <li class="font-semibold hover:text-gray-900"><a href="/">Home</a></li>
                 <li class="font-semibold hover:text-gray-900"><%= link_to "Dashboard", journals_path %></li>
                 <li class="font-semibold hover:text-gray-900"><%= link_to "Add Category", new_journal_path %></li>
                 <li class="font-semibold hover:text-gray-900"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to sign-out?' } %></li>

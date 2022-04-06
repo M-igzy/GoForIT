@@ -1,29 +1,14 @@
-    <header id="header" class="journal-header">
+    <header class="header-home sticky top-0 z-10 flex justify-center items-center gap-10 py-8 custom:flex-col">
 
-        <div class="header-logo journal-logo">
-        <%= link_to root_path do%>
-            GoForIt
-        <% end %>
-        </div>
-
-        <div class="navbar">
-            <div class="navbar-items">
-                <%= link_to journals_path do%>
-                    <div>
-                        Dashboard
-                    </div>
-                <% end %>
-                <%= link_to new_journal_path do%>
-                    <div>
-                    New Category
-                    </div>
-                <% end %>
-                <%= link_to destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to sign-out?' } do%>
-                    <div>
-                        Sign Out
-                    </div>
-                <% end %>
-            </div>
-        </div>
+        <a href="/" class="header-span text-4xl font-extrabold text-gray-900">GoForIt</a>
+        
+        <nav>
+            <ul class="nav_links flex gap-5 text-xl custom:text-md gap-2">
+                <li class="font-semibold hover:text-gray-900"><a href="/">Home</a></li>
+                <li class="font-semibold hover:text-gray-900"><%= link_to "Dashboard", journals_path %></li>
+                <li class="font-semibold hover:text-gray-900"><%= link_to "Add Category", new_journal_path %></li>
+                <li class="font-semibold hover:text-gray-900"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to sign-out?' } %></li>
+            </ul>
+        </nav>
 
     </header>

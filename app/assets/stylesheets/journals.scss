@@ -11,13 +11,23 @@
 }
 
 .add__svg,
-.edit__svg {
+.edit__svg,
+.empty__svg {
     width: 400px;
+}
+
+.hr-task {
+    margin: 0 auto;
+}
+
+.empty__svg {
+    margin: 0 auto;
 }
 
 @media screen and (max-width: 639px) {
     .add__svg,
-    .edit__svg {
+    .edit__svg,
+    .empty__svg {
         width: 250px;
         margin: 0 auto;
     }

@@ -1,82 +1,78 @@
 <%= javascript_pack_tag 'alert' %>
+
 <%= render 'navbar' %>
 
-<section id="dashboard-top-card">
-
-<div class="container tiles">
-
-    <div
-        id="task_box"
-        class="box journal-box info-box has-text-white box-bg mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-space-between"
-    >
-        <div class="is-size-4">
-            <%= @journal.name %>
-        </div>
-
-        <div class="task-progress-container is-flex">
-            <div class="mr-3 progress-container">
-                <%= @journal.percent_complete %>% Task Completed
-                <progress 
-                    class="progress is-normal is-success"
-                    value="<%= @journal.percent_complete %>" max="100">
-                </progress>
-            </div>
-            <div class="add-task">
-                <%# Link ng New Task Path %>
-                <%= link_to new_journal_task_path(@journal) do%>
-                    <i class="fas fa-plus mr-3" aria-hidden="true"></i>Task
-                <% end %>
-            </div>
-        </div>
+    <div class="flex justify-center mt-8 gap-2 text-center font-semibold text-3xl">
+        <%= @journal.name %>
     </div>
 
+    <br/>
+
+    <div class="flex justify-center gap-2 text-center text-xl">
+
+        <div>
+            <%= @journal.percent_complete %>% Task Completed
+        </div>
+
+        <div>
+            <progress 
+                class="progress is-normal is-success"
+                value="<%= @journal.percent_complete %>" max="100">
+            </progress>   
+        </div>
+        
+        <%= link_to new_journal_task_path(@journal) do%>
+            <i class="fas fa-plus mr-3" aria-hidden="true"></i>Task
+        <% end %>     
+
+    </div>
+
+    <br/>
+
+    <hr class="hr-task w-3/4 h-1 bg-gray-900"/>
+
+    <br/>
+
     <% if @journal.tasks.count == 0 %>
-        <div class="empty-task-container container is-flex is-justify-content-center is-align-items-center">
-            <div class="no-tasks-button is-flex is-justify-content-center has-text-centered">
-                <p>No Tasks Yet</p>
+        <div class="flex flex-col">
+            <%= image_tag("empty-animate.svg", :alt => 'empty task image', class: "empty__svg") %>
+            <div class="mt-8 flex gap-20 justify-center items-center">
+                <p class="text-3xl font-semibold">No Tasks Yet</p>
                 <%# Link ng New Task Path %>
-                <%= link_to new_journal_task_path(@journal) do%>
+                <%= link_to new_journal_task_path(@journal), class: 'text-3xl font-semibold' do%>
                     <i class="fas fa-plus mr-3" aria-hidden="true"></i>Add Task Now
                 <% end %>
             </div>
         </div>
     <% else %>
 
-    <div class="container tiles">
-        <div
-            id="completed-top-card"
-            class="box box2 info-box due-box box-bg mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-center"
-        >
-        <div class="is-size-3 has-text-centered">
-            Due Tasks Today!
-        </div>
-    </div>
+    
+    <h1 class="text-center text-3xl font-bold text-red-900">Due Task/s Today!</h1>
 
-    <div class="tile tile-container is-ancestor">
     <% @journal.tasks.each do |task| %>
-
 
     <% if task.completed? == false and task.deadline.today? %>
       
-    <div class="tile tile-item is-parent is-shady tile-color">
-      <article class="tile is-child box card-bg"  id="task_box">
       <%= raw task_label(task)[:html] %>
       
-      <br>
-      <div class="tile-contents">
+      <br />
+
         <strong><%= task.name %></strong>  
         <br/>
+
         <span class="tasks-time">
             <i class='bx bxs-time' ></i>         
             <%= date_parse(task.deadline) %>
          </span>
+
         <br/>
         <i class='bx bxs-chevron-right' ></i>
+
         <span class='tasks-desc'>
             <%= truncate(strip_tags(task.description.to_s), length: 100) %>
         </span>
-      </div>
-        <div class="tile-actions tasks-icons is-flex is-justify-content-flex-end">
+
+        <div class="">
         
             <%= link_to journal_task_path(@journal, task), class:"button  has-text-primary action-tile-button mr-2" do%>
                 <i class='bx bx-expand-alt' ></i>
@@ -87,24 +83,16 @@
             <%= link_to journal_task_path(@journal, task), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class:"button has-text-danger" do %>
                 <i class='bx bxs-trash' ></i>
             <% end %>
+            
         </div>
         
-      </article>
-    </div>
     <% end %>
     <% end %>
-    </div>
-  </div>
 
-    <div class="container tiles">
-        <div
-            id="completed-top-card"
-            class="box box2 your-tasks info-box box-bg mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-center"
-        >
-        <div class="is-size-3 has-text-centered">
-            Your Tasks
-        </div>
-    </div>
+    <br/><br/>
+    
+    <h1 class="text-center text-3xl font-bold text-gray-900">Your Task/s</h1>
+    
 
     <div class="tile tile-container is-ancestor">
     <% @journal.tasks.each do |task| %>
@@ -153,17 +141,7 @@
 
   <% unless @journal.percent_complete == 0 %>
     
-  <section id="dashboard-top-card">
-  <div class="container tiles">
-  <div
-    id="task_box2"
-    class="box info-box completed has-text-white box-bg2 mt-4 has-text-weight-semibold is-flex is-align-items-center is-justify-content-center"
-  >
-    <div class="is-size-4">
-        Completed Tasks
-      
-    </div>
-    </div>
+    <h1 class="text-center text-3xl font-bold text-green-900">Completed Task/s</h1>
 
   <div class="tile tile-container is-ancestor">
   <% @journal.tasks.each do |task| %>
@@ -205,9 +183,7 @@
     <% end %>
     <% end %>
   </div>
-</div>
 
-</section>
 <% end %>
 
 <% end %>
